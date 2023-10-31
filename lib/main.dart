@@ -10,6 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
+//Insert pages here
   final GoRouter _router = GoRouter(
     routes: [
       GoRoute(
