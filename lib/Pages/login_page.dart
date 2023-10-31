@@ -10,6 +10,7 @@ class LoginPage extends StatelessWidget {
         Center(
           child: Text("howdy"),
         ),
+        Text("data")
       ],
     );
   }
