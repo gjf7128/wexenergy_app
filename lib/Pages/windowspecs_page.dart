@@ -8,7 +8,7 @@ class WindowSpecsPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('WexEnergy'),
+        title: const Text('WexEnergy'),
         centerTitle: true,
       ),
       body: const Center(
