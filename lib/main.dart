@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wexenergy_app/Pages/windowspecs_page.dart';
 
 import 'Pages/login_page.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) => const WindowSpecsPage(),
       )
     ],
   );
