@@ -16,6 +16,14 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => const LoginPage(),
+      ),
+      //TODO: (gjf7128): GoRoute for BuildingInfoPage(Josh)
+      //TODO: (gjf7128): GoRoute for RoomListPage(Bryan)
+      //TODO: (gjf7128): GoRoute for WindowListPage(Xinyi)
+      //TODO: (gjf7128): GoRoute for WindowTypePage(Xinyi)
+      GoRoute(
+        path: '/WindowSpecs',
         builder: (context, state) => WindowSpecsPage(),
       )
     ],

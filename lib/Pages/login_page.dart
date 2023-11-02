@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -36,19 +37,21 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.all(paddingAllSides),
                 child: passwordTextField(),
               ),
-              const Padding(
-                padding: EdgeInsets.all(paddingAllSides),
+              Padding(
+                padding: const EdgeInsets.all(paddingAllSides),
                 child: TextButton(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(
                       Colors.blue,
                     ),
                   ),
-                  onPressed: null, // Transition here
-                  child: Text(submitButtonLabel),
+                  onPressed: () {
+                    context.go('/WindowSpecs'); //TODO: (gjf7128): Switch with BuildingInfoPage(Josh) 
+                  }, // Transition here
+                  child: const Text(submitButtonLabel),
                 ),
               )
-              // TODO(gjf7128): Clickable Text 'forgot password?
+              // TODO: (gjf7128): Clickable Text 'forgot password?
             ],
           ),
         ),
