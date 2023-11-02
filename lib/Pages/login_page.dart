@@ -73,6 +73,7 @@ class LoginPage extends StatelessWidget {
   /// Use this if we've settled on password over magic link.
   Widget passwordTextField() {
     return const TextField(
+      obscureText: true,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: passwordLabel,
