@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'window_type.dart';
 
 class Room {
@@ -7,6 +8,7 @@ class Room {
 
   Room({this.isSelected = false, this.type});
 }
+
 enum RoomType {
   bedroom,
   livingRoom,
@@ -22,6 +24,7 @@ class Unit {
 
   Unit({required this.unitName, required this.roomCount, required this.rooms});
 }
+
 List<Unit> units = [];
 
 class MyRoomListPage extends StatefulWidget {
@@ -38,9 +41,12 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
     if (unitName.isNotEmpty) {
       setState(() {
         units.add(
-          Unit(unitName: unitName, roomCount: 0, rooms: []), // you can modify room count and name
+          Unit(
+              unitName: unitName,
+              roomCount: 0,
+              rooms: []), // you can modify room count and name
         );
-        _unitController.clear();  // empty the input field
+        _unitController.clear(); // empty the input field
       });
     }
   }
@@ -56,7 +62,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
         crossAxisCount: 3, // number of units per row in the grid
         childAspectRatio: 0.6,
         //mainAxisSpacing: 30,    // vertical spacing
-        crossAxisSpacing: 20,   // horizontal spacing
+        crossAxisSpacing: 20, // horizontal spacing
       ),
       itemBuilder: (context, unitIndex) {
         final unit = units[unitIndex];
@@ -64,7 +70,8 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
           children: [
             Text(
               'Unit #${unit.unitName}', // display Unit #
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Container(
               padding: EdgeInsets.all(5),
@@ -113,7 +120,8 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                                     onPressed: () {
                                       Navigator.pop(context, type);
                                     },
-                                    child: Text(type.toString().split('.').last),
+                                    child:
+                                        Text(type.toString().split('.').last),
                                   );
                                 }).toList()
                               ],
@@ -123,7 +131,8 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                         if (selectedType != null) {
                           setState(() {
                             unit.roomCount += 1;
-                            unit.rooms.add(Room(isSelected: false, type: selectedType));
+                            unit.rooms.add(
+                                Room(isSelected: false, type: selectedType));
                           });
                         }
                       },
@@ -157,7 +166,6 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
       itemCount: units.length,
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +201,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                   // backarrow
                   InkWell(
                     onTap: () {
-                      // TODO: logistics of backarrow, back to previous page
+                      context.go('/BusinessInfoPage');
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -209,7 +217,8 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 70, vertical: 3),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 70, vertical: 3),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue[50],
                         borderRadius: BorderRadius.circular(10),
@@ -225,15 +234,18 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                               children: [
                                 TextSpan(
                                   text: 'Part 1/7 : Floor & Unit # ',
-                                  style: TextStyle(color: Colors.black, fontSize: 16),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16),
                                 ),
                                 TextSpan(
                                   text: 'Status: ',
-                                  style: TextStyle(color: Colors.black, fontSize: 16),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16),
                                 ),
                                 TextSpan(
                                   text: 'In-Progress',
-                                  style: TextStyle(color: Colors.orange, fontSize: 16),
+                                  style: TextStyle(
+                                      color: Colors.orange, fontSize: 16),
                                 ),
                               ],
                             ),
@@ -245,10 +257,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                   // forward arrow button
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MeasurementPage()),
-                      );
+                      context.go('/WindowListPage');
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -270,7 +279,8 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
         ),
       ),
       body: Padding(
-        padding: calculatePaddingBasedOnUnits(), //calculate padding based on units
+        padding:
+            calculatePaddingBasedOnUnits(), //calculate padding based on units
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,7 +304,6 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                     Container(
                       height: 200,
                       child: _buildUnitsGrid(),
-
                     ),
                     SizedBox(height: 20),
                   ],

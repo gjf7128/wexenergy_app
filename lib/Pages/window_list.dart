@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HexColor extends Color {
   static int _getColorFromHex(String hexColor) {
@@ -33,184 +34,185 @@ class WindowList extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
-          backgroundColor: white,
-          leading: IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
-              color: primaryBlue, 
-            ),
-          title: Text(
-            'WexEnergy',
-            style: TextStyle(
-              color: primaryBlue,
-            ),
-          ),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.help_outline),
-              onPressed: () {
-                // Handle the question mark button press.
-              },
-              color: primaryOrange,
-            ),
-          ],
+        elevation: 0,
+        backgroundColor: white,
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {},
+          color: primaryBlue,
         ),
-        body: Column(
-          children: [
-            Row(
-              children: [
-                InkWell(
-                  borderRadius: BorderRadius.circular(30.0),
-                  onTap: () {
-                    // Handle the back arrow press.
-                  },
+        title: Text(
+          'WexEnergy',
+          style: TextStyle(
+            color: primaryBlue,
+          ),
+        ),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            onPressed: () {
+              // Handle the question mark button press.
+            },
+            color: primaryOrange,
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              InkWell(
+                borderRadius: BorderRadius.circular(30.0),
+                onTap: () {
+                  context.go('/RoomListPage');
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: white,
+                    border: Border.all(color: borderBlue),
+                  ),
+                  padding: const EdgeInsets.all(3),
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: primaryBlue,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  width: screenWidth * 0.7,
                   child: Container(
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(10.0),
                       color: white,
                       border: Border.all(color: borderBlue),
                     ),
-                    padding: const EdgeInsets.all(3),
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: primaryBlue,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: screenWidth * 0.7,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: white,
-                        border: Border.all(color: borderBlue),
-                      ),
-                      padding: const EdgeInsets.all(6),
-                      child: const Text('Part 5/7: Window List\n Status: In-Progress'),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  borderRadius: BorderRadius.circular(20.0),
-                  onTap: () {
-                    // Handle the forward arrow press.
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: white,
-                      border: Border.all(
-                        color: borderBlue,
-                        width: 3,
-                      ),
-                    ),
                     padding: const EdgeInsets.all(6),
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: primaryBlue,
-                    ),
+                    child: const Text(
+                        'Part 5/7: Window List\n Status: In-Progress'),
                   ),
                 ),
-              ],
-            ),
-              Row(
+              ),
+              InkWell(
+                borderRadius: BorderRadius.circular(20.0),
+                onTap: () {
+                  context.go('/WindowTypePage');
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: white,
+                    border: Border.all(
+                      color: borderBlue,
+                      width: 3,
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(6),
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: primaryBlue,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                width: screenWidth * 0.85,
+                height: screenHeight * 0.015,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  border: Border.all(color: borderBlue),
+                ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: LinearProgressIndicator(
+                    value: 0.54,
+                    valueColor: AlwaysStoppedAnimation<Color>(primaryOrange),
+                    backgroundColor: white,
+                  ),
+                ),
+              ),
+              const Text(" 54%"),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 20),
-                  width: screenWidth * 0.85,
-                  height: screenHeight * 0.015,
+                  padding: const EdgeInsets.all(6),
+                  width: screenWidth * 0.95,
+                  height: screenHeight * 0.7,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    border: Border.all(color: borderBlue),
+                    border: Border.all(color: primaryBlue),
+                    color: primaryBlue,
                   ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    child: LinearProgressIndicator(
-                      value: 0.54,
-                      valueColor: AlwaysStoppedAnimation<Color>(primaryOrange),
-                      backgroundColor: white,
-                    ),
-                  ),
-                ),
-                const Text(" 54%"),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(6),
-                    width: screenWidth * 0.95,
-                    height: screenHeight * 0.7,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      border: Border.all(color: primaryBlue),
-                      color: primaryBlue,
-                    ),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
                           '"Brooklyn Hei..." Bedroom: 2/ Windows: 2',
                           style: TextStyle(
                             color: borderBlue,
-                            ),
                           ),
                         ),
-                        SizedBox(height: 10),
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  'Window 1',
-                                  style: TextStyle(
-                                    color: white,
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                  width: screenWidth * 0.3,
-                                  height: screenHeight * 0.15,
-                                  padding: const EdgeInsets.all(2),
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                'Window 1',
+                                style: TextStyle(
                                   color: white,
                                 ),
-                              ],
-                            ),
-                            SizedBox(width: 5),
-                            Column(
-                              children: [
-                                Text(
-                                  'Window 2',
-                                  style: TextStyle(
-                                    color: white,
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                  width: screenWidth * 0.3,
-                                  height: screenHeight * 0.15,
-                                  padding: const EdgeInsets.all(2),
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                width: screenWidth * 0.3,
+                                height: screenHeight * 0.15,
+                                padding: const EdgeInsets.all(2),
+                                color: white,
+                              ),
+                            ],
+                          ),
+                          SizedBox(width: 5),
+                          Column(
+                            children: [
+                              Text(
+                                'Window 2',
+                                style: TextStyle(
                                   color: white,
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                width: screenWidth * 0.3,
+                                height: screenHeight * 0.15,
+                                padding: const EdgeInsets.all(2),
+                                color: white,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 }

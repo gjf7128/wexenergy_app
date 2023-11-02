@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'roomlist.dart';
-
 
 List<String> windowTypes = [
   '2-wide-single-hung',
@@ -12,20 +12,16 @@ List<String> windowTypes = [
   '2-wide-fixed-frame',
   '2-high-fixed-frame',
   '3-wide-fixed-frame',
-
 ];
-
 
 class MeasurementPage extends StatefulWidget {
   @override
   _MeasurementPageState createState() => _MeasurementPageState();
 }
 
-
 class _MeasurementPageState extends State<MeasurementPage> {
-
-  String? selectedWindowType=null;
-  Size? windowDimensions;  // store input size
+  String? selectedWindowType = null;
+  Size? windowDimensions; // store input size
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +57,7 @@ class _MeasurementPageState extends State<MeasurementPage> {
                   //backarrow
                   InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      context.go('/WindowListPage');
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -77,7 +73,8 @@ class _MeasurementPageState extends State<MeasurementPage> {
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue[50],
                         borderRadius: BorderRadius.circular(10),
@@ -93,15 +90,18 @@ class _MeasurementPageState extends State<MeasurementPage> {
                               children: [
                                 TextSpan(
                                   text: 'Part 4/7 : Enter Window Type ',
-                                  style: TextStyle(color: Colors.black, fontSize: 16),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16),
                                 ),
                                 TextSpan(
                                   text: '      Status: ',
-                                  style: TextStyle(color: Colors.black, fontSize: 16),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16),
                                 ),
                                 TextSpan(
                                   text: 'In-Progress',
-                                  style: TextStyle(color: Colors.orange, fontSize: 16),
+                                  style: TextStyle(
+                                      color: Colors.orange, fontSize: 16),
                                 ),
                               ],
                             ),
@@ -113,8 +113,7 @@ class _MeasurementPageState extends State<MeasurementPage> {
                   // forward arrow
                   InkWell(
                     onTap: () {
-                      //TODO: this arrow should navigate to windowspecs page
-
+                      context.go('/WindowSpecsPage');
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -164,7 +163,6 @@ class _MeasurementPageState extends State<MeasurementPage> {
                           : Image.asset('assets/$selectedWindowType.png'),
                     ),
                     SizedBox(height: 20),
-
                   ],
                 ),
               ),
@@ -197,6 +195,5 @@ class _MeasurementPageState extends State<MeasurementPage> {
     );
   }
 }
-
 
 void main() => runApp(MaterialApp(home: MeasurementPage()));

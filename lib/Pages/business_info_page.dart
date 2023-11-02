@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BusinessInfoPage extends StatelessWidget {
   const BusinessInfoPage({super.key});
@@ -74,7 +75,9 @@ Widget build(BuildContext context) {
                                 )
                               )
                             ),
-                            onPressed: () => null,
+                            onPressed: () {
+                              context.go('/RoomListPage');
+                            },
                             child: const Text('Start Measuring') 
                           )
                         ],
