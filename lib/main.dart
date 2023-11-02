@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const WindowSpecsPage(),
+        builder: (context, state) => WindowSpecsPage(),
       )
     ],
   );
