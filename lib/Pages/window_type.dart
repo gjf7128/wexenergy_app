@@ -15,23 +15,23 @@ List<String> windowTypes = [
 
 ];
 
-// 创建 StatefulWidget
+
 class MeasurementPage extends StatefulWidget {
   @override
   _MeasurementPageState createState() => _MeasurementPageState();
 }
 
-// 创建与 StatefulWidget 相关的 State 类
+
 class _MeasurementPageState extends State<MeasurementPage> {
 
   String? selectedWindowType=null;
-  Size? windowDimensions;  // 存储用户输入的窗户尺寸
+  Size? windowDimensions;  // store input size
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120.0), // 调整这里来设置AppBar的高度
+        preferredSize: Size.fromHeight(120.0), // appbar height
         child: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -58,7 +58,7 @@ class _MeasurementPageState extends State<MeasurementPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // 后退按钮
+                  //backarrow
                   InkWell(
                     onTap: () {
                       Navigator.pop(context);
@@ -110,14 +110,11 @@ class _MeasurementPageState extends State<MeasurementPage> {
                       ),
                     ),
                   ),
-                  // 前进按钮
+                  // forward arrow
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => MeasurementPage()),
-                      // );
-                      //NextPage
+                      //TODO: this arrow should navigate to windowspecs page
+
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -161,7 +158,7 @@ class _MeasurementPageState extends State<MeasurementPage> {
                     ),
                     SizedBox(height: 20),
                     Container(
-                      height: 200, // 您可以根据需要进行调整
+                      height: 200,
                       child: selectedWindowType == null
                           ? Center(child: Text('Please select window types:'))
                           : Image.asset('assets/$selectedWindowType.png'),
@@ -173,10 +170,10 @@ class _MeasurementPageState extends State<MeasurementPage> {
               ),
               SizedBox(height: 20),
               Container(
-                height: 500, // 或其他合适的高度
+                height: 500,
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, // 每行显示的数量
+                    crossAxisCount: 3,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
@@ -188,7 +185,7 @@ class _MeasurementPageState extends State<MeasurementPage> {
                           selectedWindowType = windowTypes[index];
                         });
                       },
-                      child: Image.asset('assets/${windowTypes[index]}.png'), // 根据你的文件路径和文件名调整
+                      child: Image.asset('assets/${windowTypes[index]}.png'),
                     );
                   },
                 ),

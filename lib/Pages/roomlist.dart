@@ -38,9 +38,9 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
     if (unitName.isNotEmpty) {
       setState(() {
         units.add(
-          Unit(unitName: unitName, roomCount: 0, rooms: []), // 这里您可以根据需要调整roomCount和rooms
+          Unit(unitName: unitName, roomCount: 0, rooms: []), // you can modify room count and name
         );
-        _unitController.clear();  // 清除输入框的内容
+        _unitController.clear();  // empty the input field
       });
     }
   }
@@ -48,22 +48,22 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
   //create unit grids function
   Widget _buildUnitsGrid() {
     if (units.isEmpty) {
-      // 如果为空，返回一个空的Container
+      // base case
       return Container();
     }
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // 这里你可以根据实际情况进行调整，例如，如果你希望显示3个units，那么这里应为3
+        crossAxisCount: 3, // number of units per row in the grid
         childAspectRatio: 0.6,
-        //mainAxisSpacing: 30,    // 增加垂直间距
-        crossAxisSpacing: 20,   // 增加水平间距
+        //mainAxisSpacing: 30,    // vertical spacing
+        crossAxisSpacing: 20,   // horizontal spacing
       ),
       itemBuilder: (context, unitIndex) {
         final unit = units[unitIndex];
         return Column(
           children: [
             Text(
-              'Unit #${unit.unitName}', // 显示Unit #
+              'Unit #${unit.unitName}', // display Unit #
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Container(
@@ -148,7 +148,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
             ),
             SizedBox(height: 5),
             Text(
-              '${unit.roomCount} Rooms', // 显示房间数
+              '${unit.roomCount} Rooms', // display number of rooms
               style: TextStyle(color: Colors.black),
             ),
           ],
@@ -163,7 +163,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120.0), // 调整这里来设置AppBar的高度
+        preferredSize: Size.fromHeight(120.0), // appBar height
         child: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -190,10 +190,10 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // 后退按钮
+                  // backarrow
                   InkWell(
                     onTap: () {
-                      // TODO: 这里添加您的后退逻辑
+                      // TODO: logistics of backarrow, back to previous page
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -242,7 +242,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                       ),
                     ),
                   ),
-                  // 前进按钮
+                  // forward arrow button
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -270,7 +270,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
         ),
       ),
       body: Padding(
-        padding: calculatePaddingBasedOnUnits(),
+        padding: calculatePaddingBasedOnUnits(), //calculate padding based on units
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -292,7 +292,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                     ),
                     SizedBox(height: 20),
                     Container(
-                      height: 200, // 你可以根据需要调整
+                      height: 200,
                       child: _buildUnitsGrid(),
 
                     ),
@@ -337,8 +337,6 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
 EdgeInsetsGeometry calculatePaddingBasedOnUnits() {
   int numberOfUnits = units.length;
 
-  // 根据unit的数量来设定适当的padding值
-  // 此处只是一个示例，您可以根据需要进行调整
   double paddingValue = 10.0 + numberOfUnits;
   return EdgeInsets.all(paddingValue);
 }
