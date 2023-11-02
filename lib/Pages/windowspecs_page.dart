@@ -16,9 +16,14 @@ class WindowSpecsPage extends StatelessWidget{
         centerTitle: true,
       ),
       body: const Center(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 150),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 100)
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -58,6 +63,7 @@ class WindowSpecsPage extends StatelessWidget{
             ]
           )
         )
+      )
     );
     }
 
