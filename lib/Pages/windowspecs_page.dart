@@ -15,8 +15,13 @@ class WindowSpecsPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: const Text('WexEnergy'),
-        centerTitle: true,
+        title: Center(
+          child: Image.asset(
+            'assets/WEX_energy_logo.png',
+            height: 200,
+            width: 200,
+          ),
+        )
       ),
       body: Center(
         child: Padding(

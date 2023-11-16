@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    context.go('/WindowSpecs'); //TODO: (gjf7128): Switch with BuildingInfoPage(Josh) 
+                    context.go('/BusinessInfoPage');
                   }, // Transition here
                   child: const Text(submitButtonLabel),
                 ),

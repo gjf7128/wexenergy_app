@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wexenergy_app/Pages/business_info_page.dart';
+import 'package:wexenergy_app/Pages/roomlist.dart';
+import 'package:wexenergy_app/Pages/window_list.dart';
+import 'package:wexenergy_app/Pages/window_type.dart';
 import 'package:wexenergy_app/Pages/windowspecs_page.dart';
 
 import 'Pages/login_page.dart';
@@ -11,19 +15,30 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-//Insert pages here
   final GoRouter _router = GoRouter(
     routes: [
       GoRoute(
         path: '/',
         builder: (context, state) => const LoginPage(),
       ),
-      //TODO: (gjf7128): GoRoute for BuildingInfoPage(Josh)
-      //TODO: (gjf7128): GoRoute for RoomListPage(Bryan)
-      //TODO: (gjf7128): GoRoute for WindowListPage(Xinyi)
-      //TODO: (gjf7128): GoRoute for WindowTypePage(Xinyi)
       GoRoute(
-        path: '/WindowSpecs',
+        path: '/BusinessInfoPage',
+        builder: (context, state) => const BusinessInfoPage(),
+      ),
+      GoRoute(
+        path: '/RoomListPage',
+        builder: (context, state) => MyRoomListPage(),
+      ),
+      GoRoute(
+        path: '/WindowListPage',
+        builder: (context, state) => WindowList(),
+      ),
+      GoRoute(
+        path: '/WindowTypePage',
+        builder: (context, state) => MeasurementPage(),
+      ),
+      GoRoute(
+        path: '/WindowSpecsPage',
         builder: (context, state) => WindowSpecsPage(),
       )
     ],
