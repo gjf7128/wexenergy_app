@@ -1,11 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wexenergy_app/models/window.dart';
-
-//TODO: (gjf7128): Uncomment part 'customer.g.dart' and fromJson and toJson below and then run
-// 'dart run build_runner build --delete-conflicting-outputs' in the terminal
-// once children classes are defined.
-// part 'room.g.dart';
+part 'room.g.dart';
 
 @JsonSerializable()
 class Room extends Equatable {
@@ -35,11 +31,9 @@ class Room extends Equatable {
           roomNotes: roomNotes ?? this.roomNotes,
           roomId: roomId ?? this.roomId);
 
-//
-  // factory Room.fromJson(Map<String, dynamic> json) =>
-  //     _$RoomFromJson(json);
+  factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);
 
-  // Map<String, dynamic> toJson() => _$RoomFromJson(this);
+  Map<String, dynamic> toJson() => _$RoomToJson(this);
 
   @override
   List<Object?> get props => [roomType, floorLevel, windows, roomNotes, roomId];

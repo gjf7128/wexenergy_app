@@ -3,11 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:wexenergy_app/models/address.dart';
 import 'package:wexenergy_app/models/date.dart';
 import 'package:wexenergy_app/models/room.dart';
-
-//TODO: (gjf7128): Uncomment part 'customer.g.dart' and fromJson and toJson below and then run
-// 'dart run build_runner build --delete-conflicting-outputs' in the terminal
-// once children classes are defined.
-// part 'building.g.dart';
+part 'building.g.dart';
 
 @JsonSerializable()
 class Building extends Equatable {
@@ -53,12 +49,21 @@ class Building extends Equatable {
           windowCount: windowCount ?? this.windowCount,
           buildingNotes: buildingNotes ?? this.buildingNotes);
 
-//
-  // factory Building.fromJson(Map<String, dynamic> json) =>
-  //     _$BuildingFromJson(json);
+  factory Building.fromJson(Map<String, dynamic> json) =>
+      _$BuildingFromJson(json);
 
-  // Map<String, dynamic> toJson() => _$BuildingFromJson(this);
+  Map<String, dynamic> toJson() => _$BuildingToJson(this);
 
   @override
-  List<Object?> get props => [address, visitDate, propertyType, constructionDate, conversionDate, squareFeet, rooms, windowCount, buildingNotes];
+  List<Object?> get props => [
+        address,
+        visitDate,
+        propertyType,
+        constructionDate,
+        conversionDate,
+        squareFeet,
+        rooms,
+        windowCount,
+        buildingNotes
+      ];
 }

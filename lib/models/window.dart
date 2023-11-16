@@ -4,11 +4,7 @@ import 'package:wexenergy_app/models/clearance.dart';
 import 'package:wexenergy_app/models/frame_type.dart';
 import 'package:wexenergy_app/models/orientation.dart';
 import 'package:wexenergy_app/models/pane.dart';
-
-//TODO: (gjf7128): Uncomment part 'customer.g.dart' and fromJson and toJson below and then run
-// 'dart run build_runner build --delete-conflicting-outputs' in the terminal
-// once children classes are defined.
-// part 'window.g.dart';
+part 'window.g.dart';
 
 @JsonSerializable()
 class Window extends Equatable {
@@ -34,11 +30,9 @@ class Window extends Equatable {
           clearance: clearance ?? this.clearance,
           panes: panes ?? this.panes);
 
-//
-  // factory Window.fromJson(Map<String, dynamic> json) =>
-  //     _$WindowFromJson(json);
+  factory Window.fromJson(Map<String, dynamic> json) => _$WindowFromJson(json);
 
-  // Map<String, dynamic> toJson() => _$WindowFromJson(this);
+  Map<String, dynamic> toJson() => _$WindowToJson(this);
 
   @override
   List<Object?> get props => [frameType, orientation, clearance, panes];

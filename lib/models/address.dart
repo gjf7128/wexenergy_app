@@ -1,10 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-//TODO: (gjf7128): Uncomment part 'customer.g.dart' and fromJson and toJson below and then run
-// 'dart run build_runner build --delete-conflicting-outputs' in the terminal
-// once children classes are defined.
-// part 'address.g.dart';
+part 'address.g.dart';
 
 @JsonSerializable()
 class Address extends Equatable {
@@ -38,11 +34,10 @@ class Address extends Equatable {
           addressState: addressState ?? this.addressState,
           zipCode: zipCode ?? this.zipCode);
 
-//
-  // factory Address.fromJson(Map<String, dynamic> json) =>
-  //     _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
 
-  // Map<String, dynamic> toJson() => _$AddressFromJson(this);
+  Map<String, dynamic> toJson() => _$AddressToJson(this);
 
   @override
   List<Object?> get props => [

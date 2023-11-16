@@ -1,10 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-//TODO: (gjf7128): Uncomment part 'customer.g.dart' and fromJson and toJson below and then run
-// 'dart run build_runner build --delete-conflicting-outputs' in the terminal
-// once children classes are defined.
-// part 'quote.g.dart';
+part 'quote.g.dart';
 
 @JsonSerializable()
 class Quote extends Equatable {
@@ -38,11 +34,9 @@ class Quote extends Equatable {
           simplePayback: simplePayback ?? this.simplePayback,
           netCashFlow: netCashFlow ?? this.netCashFlow);
 
-//
-  // factory Quote.fromJson(Map<String, dynamic> json) =>
-  //     _$QuoteFromJson(json);
+  factory Quote.fromJson(Map<String, dynamic> json) => _$QuoteFromJson(json);
 
-  // Map<String, dynamic> toJson() => _$QuoteFromJson(this);
+  Map<String, dynamic> toJson() => _$QuoteToJson(this);
 
   @override
   List<Object?> get props => [

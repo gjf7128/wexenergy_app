@@ -1,11 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wexenergy_app/models/skin_type.dart';
-
-//TODO: (gjf7128): Uncomment part 'customer.g.dart' and fromJson and toJson below and then run
-// 'dart run build_runner build --delete-conflicting-outputs' in the terminal
-// once children classes are defined.
-// part 'pane.g.dart';
+part 'pane.g.dart';
 
 @JsonSerializable()
 class Pane extends Equatable {
@@ -28,11 +24,9 @@ class Pane extends Equatable {
           height: height ?? this.height,
           width: width ?? this.width);
 
-//
-  // factory Pane.fromJson(Map<String, dynamic> json) =>
-  //     _$PaneFromJson(json);
+  factory Pane.fromJson(Map<String, dynamic> json) => _$PaneFromJson(json);
 
-  // Map<String, dynamic> toJson() => _$PaneFromJson(this);
+  Map<String, dynamic> toJson() => _$PaneToJson(this);
 
   @override
   List<Object?> get props => [paneId, skinType, height, width];
