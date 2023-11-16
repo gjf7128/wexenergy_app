@@ -10,16 +10,27 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class Customer extends Equatable {
+  final String email;
+  final List<Building> buildings;
+  final int buildingCount;
+  final Quote quote;
+
   const Customer(
       {required this.email,
       required this.buildings,
       required this.buildingCount,
       required this.quote});
 
-  final String email;
-  final List<Building> buildings;
-  final int buildingCount;
-  final Quote quote;
+  Customer copyWith(
+          {String? email,
+          List<Building>? buildings,
+          int? buildingCount,
+          Quote? quote}) =>
+      Customer(
+          email: email ?? this.email,
+          buildings: buildings ?? this.buildings,
+          buildingCount: buildingCount ?? this.buildingCount,
+          quote: quote ?? this.quote);
 
 //
   // factory Customer.fromJson(Map<String, dynamic> json) =>
