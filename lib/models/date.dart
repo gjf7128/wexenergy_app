@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 //TODO: (gjf7128): Uncomment part 'customer.g.dart' and fromJson and toJson below and then run
 // 'dart run build_runner build --delete-conflicting-outputs' in the terminal
 // once children classes are defined.
-// part 'customer.g.dart';
+// part 'date.g.dart';
 
 @JsonSerializable()
 class Date extends Equatable {
@@ -26,5 +26,5 @@ class Date extends Equatable {
   // Map<String, dynamic> toJson() => _$DateFromJson(this);
 
   @override
-  List<Object> get props => [month, day, year];
+  List<Object?> get props => [month, day, year];
 }

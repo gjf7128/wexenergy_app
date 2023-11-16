@@ -1,0 +1,4 @@
+enum SkinType{
+  solar,
+  polar
+}

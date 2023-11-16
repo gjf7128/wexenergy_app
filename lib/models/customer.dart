@@ -39,5 +39,5 @@ class Customer extends Equatable {
   // Map<String, dynamic> toJson() => _$CustomerFromJson(this);
 
   @override
-  List<Object> get props => [email, buildings, buildingCount, quote];
+  List<Object?> get props => [email, buildings, buildingCount, quote];
 }
