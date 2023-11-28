@@ -19,6 +19,12 @@ class Window extends Equatable {
       required this.clearance,
       required this.panes});
 
+  const Window.initialize()
+      : frameType = FrameType.fixed,
+        orientation = Orientation.north,
+        clearance = Clearance.low,
+        panes = const [];
+
   Window copyWith(
           {FrameType? frameType,
           Orientation? orientation,

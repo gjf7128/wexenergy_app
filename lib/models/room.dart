@@ -18,6 +18,13 @@ class Room extends Equatable {
       required this.roomNotes,
       required this.roomId});
 
+  const Room.initialize()
+      : roomType = '',
+        floorLevel = 0,
+        windows = const [],
+        roomNotes = '',
+        roomId = 0;
+
   Room copyWith(
           {String? roomType,
           int? floorLevel,

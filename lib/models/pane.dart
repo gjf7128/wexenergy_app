@@ -16,6 +16,12 @@ class Pane extends Equatable {
       required this.height,
       required this.width});
 
+  const Pane.initialize()
+      : paneId = 0,
+        skinType = SkinType.solar,
+        height = 0.0,
+        width = 0.0;
+
   Pane copyWith(
           {int? paneId, SkinType? skinType, double? height, double? width}) =>
       Pane(

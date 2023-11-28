@@ -19,6 +19,14 @@ class Address extends Equatable {
       required this.addressState,
       required this.zipCode});
 
+  const Address.initialize()
+      : streetNumber = 0,
+        streetName = '',
+        streetSuffix = '',
+        apartmentNumber = '',
+        addressState = '',
+        zipCode = 0;
+
   Address copyWith(
           {int? streetNumber,
           String? streetName,

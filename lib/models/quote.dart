@@ -19,6 +19,14 @@ class Quote extends Equatable {
       required this.simplePayback,
       required this.netCashFlow});
 
+  const Quote.initialize()
+      : recommendation = '',
+        optionsSummary = '',
+        skinDistribution = '',
+        totalCost = 0.0,
+        simplePayback = 0,
+        netCashFlow = 0.0;
+
   Quote copyWith(
           {String? recommendation,
           String? optionsSummary,

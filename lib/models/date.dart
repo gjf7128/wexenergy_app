@@ -10,6 +10,11 @@ class Date extends Equatable {
 
   const Date({required this.month, required this.day, required this.year});
 
+  const Date.initialize()
+      : month = 0,
+        day = 0,
+        year = 0;
+
   Date copyWith({int? month, int? day, int? year}) => Date(
       month: month ?? this.month,
       day: day ?? this.day,

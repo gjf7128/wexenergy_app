@@ -28,6 +28,17 @@ class Building extends Equatable {
       required this.windowCount,
       required this.buildingNotes});
 
+  const Building.initialize()
+      : address = const Address.initialize(),
+        visitDate = const Date.initialize(),
+        propertyType = '',
+        constructionDate = const Date.initialize(),
+        conversionDate = const Date.initialize(),
+        squareFeet = 0.0,
+        rooms = const [],
+        windowCount = 0,
+        buildingNotes = '';
+
   Building copyWith(
           {Address? address,
           Date? visitDate,

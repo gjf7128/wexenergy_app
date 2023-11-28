@@ -17,6 +17,12 @@ class Customer extends Equatable {
       required this.buildingCount,
       required this.quote});
 
+  const Customer.initialize()
+      : email = '',
+        buildings = const [],
+        buildingCount = 0,
+        quote = const Quote.initialize();
+
   Customer copyWith(
           {String? email,
           List<Building>? buildings,
