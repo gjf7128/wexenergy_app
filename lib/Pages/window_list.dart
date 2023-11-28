@@ -41,10 +41,16 @@ class WindowList extends StatelessWidget {
           onPressed: () {},
           color: primaryBlue,
         ),
-        title: Text(
-          'WexEnergy',
-          style: TextStyle(
-            color: primaryBlue,
+        title: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/WEX_energy_logo.png',
+                height: 200,
+                width: 200,
+              ),
+            ],
           ),
         ),
         centerTitle: true,
@@ -83,16 +89,16 @@ class WindowList extends StatelessWidget {
               Expanded(
                 child: Container(
                   alignment: Alignment.center,
-                  width: screenWidth * 0.7,
+                  width: screenWidth * 0.8,
                   child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: white,
-                      border: Border.all(color: borderBlue),
-                    ),
                     padding: const EdgeInsets.all(6),
                     child: const Text(
-                        'Part 5/7: Window List\n Status: In-Progress'),
+                        'Window List',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                    ),
                   ),
                 ),
               ),
@@ -119,36 +125,14 @@ class WindowList extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 20),
-                width: screenWidth * 0.85,
-                height: screenHeight * 0.015,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(color: borderBlue),
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: LinearProgressIndicator(
-                    value: 0.54,
-                    valueColor: AlwaysStoppedAnimation<Color>(primaryOrange),
-                    backgroundColor: white,
-                  ),
-                ),
-              ),
-              const Text(" 54%"),
-            ],
-          ),
           Padding(
-            padding: const EdgeInsets.all(2.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
                 Container(
                   padding: const EdgeInsets.all(6),
                   width: screenWidth * 0.95,
-                  height: screenHeight * 0.7,
+                  height: screenHeight * 0.75,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     border: Border.all(color: primaryBlue),
