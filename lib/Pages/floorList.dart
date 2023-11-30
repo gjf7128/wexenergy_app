@@ -19,10 +19,10 @@ class _MyFloorListPageState extends State<MyFloorListPage> {
   TextEditingController _unitController = TextEditingController();
 
   void _showAddUnitDialog() async {
-    // 使用 TextEditingController 来获取输入框中的文本
+    // Use TextEditingController to retrieve the text content
     TextEditingController _dialogTextController = TextEditingController();
 
-    // 显示对话框
+    // show dialog
     await showDialog<String>(
       context: context,
       builder: (BuildContext context) {
@@ -41,7 +41,7 @@ class _MyFloorListPageState extends State<MyFloorListPage> {
             ),
             TextButton(
               onPressed: () {
-                // 当用户点击确认时，调用 _addNewUnit 并关闭对话框
+                // whenever user hits confirm，call _addNewUnit to close the dialog
                 _addNewUnit(_dialogTextController.text);
                 Navigator.pop(context, 'OK');
               },
