@@ -14,10 +14,41 @@ class MyRoomListPage extends StatefulWidget {
 
 class _MyRoomListPageState extends State<MyRoomListPage> {
   TextEditingController _unitController = TextEditingController();
+  void _showAddRoomDialog() async {
+    TextEditingController _dialogTextController = TextEditingController();
+
+    await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add New Room'),
+          content: TextField(
+            controller: _dialogTextController,
+            decoration: const InputDecoration(
+              hintText: 'Enter Room Name',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                _addNewRoom(_dialogTextController.text);
+                Navigator.pop(context, 'OK');
+              },
+              child: const Text('Confirm'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   //add new unit function
-  void _addNewRoom() { //change to addnewRoom
-    String roomName = _unitController.text;
+  void _addNewRoom(String roomName) { //change to addnewRoom
+    //String roomName = _unitController.text;
     if (roomName.isNotEmpty) {
       setState(() {
         rooms.add(
@@ -136,7 +167,9 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                   Expanded(
                     child: Container(
                       padding:
-                      EdgeInsets.symmetric(horizontal: 70, vertical: 3),
+                          EdgeInsets.symmetric(horizontal: 70, vertical: 10),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue[50],
                         borderRadius: BorderRadius.circular(10),
@@ -154,16 +187,6 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                                   text: '     Floor#: ,  Unit#     ',
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 16),
-                                ),
-                                TextSpan(
-                                  text: 'Status: ',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                                TextSpan(
-                                  text: 'In-Progress',
-                                  style: TextStyle(
-                                      color: Colors.orange, fontSize: 16),
                                 ),
                               ],
                             ),
@@ -228,23 +251,8 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                 ),
               ),
               SizedBox(height: 20),
-              TextField(
-                controller: _unitController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  labelText: 'Enter Room Type(LivingRoom1, LivingRoom2 etc.)',
-                  labelStyle: TextStyle(color: Colors.blue),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _addNewRoom,
+                onPressed: _showAddRoomDialog,
                 child: Text('Add New Room'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,

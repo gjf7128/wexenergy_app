@@ -18,9 +18,44 @@ class MyFloorListPage extends StatefulWidget {
 class _MyFloorListPageState extends State<MyFloorListPage> {
   TextEditingController _unitController = TextEditingController();
 
+  void _showAddUnitDialog() async {
+    // 使用 TextEditingController 来获取输入框中的文本
+    TextEditingController _dialogTextController = TextEditingController();
+
+    // 显示对话框
+    await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add New Unit'),
+          content: TextField(
+            controller: _dialogTextController,
+            decoration: const InputDecoration(
+              hintText: 'Enter Unit #',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // 当用户点击确认时，调用 _addNewUnit 并关闭对话框
+                _addNewUnit(_dialogTextController.text);
+                Navigator.pop(context, 'OK');
+              },
+              child: const Text('Confirm'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   //add new unit function
-  void _addNewUnit() {
-    String unitName = _unitController.text;
+  void _addNewUnit(String unitName) {
+    //String unitName = _unitController.text;
     if (unitName.isNotEmpty) {
       setState(() {
         units.add(
@@ -144,7 +179,9 @@ class _MyFloorListPageState extends State<MyFloorListPage> {
                   Expanded(
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 70, vertical: 3),
+                          EdgeInsets.symmetric(horizontal: 70, vertical: 10),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue[50],
                         borderRadius: BorderRadius.circular(10),
@@ -162,16 +199,6 @@ class _MyFloorListPageState extends State<MyFloorListPage> {
                                   text: ' Current Floor Page ',
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 16),
-                                ),
-                                TextSpan(
-                                  text: 'Status: ',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                                TextSpan(
-                                  text: 'In-Progress',
-                                  style: TextStyle(
-                                      color: Colors.orange, fontSize: 16),
                                 ),
                               ],
                             ),
@@ -236,23 +263,8 @@ class _MyFloorListPageState extends State<MyFloorListPage> {
                 ),
               ),
               SizedBox(height: 20),
-              TextField(
-                controller: _unitController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  labelText: 'Enter Unit #',
-                  labelStyle: TextStyle(color: Colors.blue),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _addNewUnit,
+                onPressed: _showAddUnitDialog,
                 child: Text('Add New Unit'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,

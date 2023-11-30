@@ -74,7 +74,9 @@ class _MeasurementPageState extends State<MeasurementPage> {
                   Expanded(
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 70, vertical: 10),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         color: Colors.lightBlue[50],
                         borderRadius: BorderRadius.circular(10),
@@ -89,19 +91,9 @@ class _MeasurementPageState extends State<MeasurementPage> {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: 'Part 4/7 : Enter Window Type ',
+                                  text: 'Choose Window Type ',
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 16),
-                                ),
-                                TextSpan(
-                                  text: '      Status: ',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                                TextSpan(
-                                  text: 'In-Progress',
-                                  style: TextStyle(
-                                      color: Colors.orange, fontSize: 16),
                                 ),
                               ],
                             ),
