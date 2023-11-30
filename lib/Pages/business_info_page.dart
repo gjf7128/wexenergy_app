@@ -66,17 +66,10 @@ Widget build(BuildContext context) {
                           const Text('Step 1: Floor & Unit #', textAlign: TextAlign.right, style: TextStyle(fontWeight: FontWeight.bold)),
                           TextButton(
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 0, 0, 0)),
-                              backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 255, 198, 113)),
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18), 
-                                  side: const BorderSide(color: Colors.orange)
-                                )
-                              )
+                              foregroundColor: MaterialStatePropertyAll(Colors.white),
+                              backgroundColor: MaterialStatePropertyAll(Colors.blue)
                             ),
                             onPressed: () {
-                              
                               context.go('/BuildingListPage');
                             },
                             child: const Text('Start Measuring') 
