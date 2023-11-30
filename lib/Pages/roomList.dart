@@ -1,33 +1,126 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'floorList.dart';
+import 'models.dart';
 
-List<String> windowTypes = [
-  '2-wide-single-hung',
-  '3-wide-single-hung',
-  'fixed-with-single-hung-flankers',
-  'fixed-frame-over-left-sliding',
-  'fixed-frame-over-right-sliding',
-  'fixed-frame-over-fixed-with-sliding-flankers',
-  '2-wide-fixed-frame',
-  '2-high-fixed-frame',
-  '3-wide-fixed-frame',
-];
 
-class MeasurementPage extends StatefulWidget {
+List<Room> rooms = [];
+
+class MyRoomListPage extends StatefulWidget {
+
   @override
-  _MeasurementPageState createState() => _MeasurementPageState();
+  _MyRoomListPageState createState() => _MyRoomListPageState();
 }
 
-class _MeasurementPageState extends State<MeasurementPage> {
-  String? selectedWindowType = null;
-  Size? windowDimensions; // store input size
+class _MyRoomListPageState extends State<MyRoomListPage> {
+  TextEditingController _unitController = TextEditingController();
+  void _showAddRoomDialog() async {
+    TextEditingController _dialogTextController = TextEditingController();
+
+    await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add New Room'),
+          content: TextField(
+            controller: _dialogTextController,
+            decoration: const InputDecoration(
+              hintText: 'Enter Room Name',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                _addNewRoom(_dialogTextController.text);
+                Navigator.pop(context, 'OK');
+              },
+              child: const Text('Confirm'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  //add new unit function
+  void _addNewRoom(String roomName) { //change to addnewRoom
+    //String roomName = _unitController.text;
+    if (roomName.isNotEmpty) {
+      setState(() {
+        rooms.add(
+          Room(
+              roomTypeName: roomName,
+          ), // you can modify room count and name
+        );
+        _unitController.clear(); // empty the input field
+      });
+    }
+  }
+
+  //create unit grids function
+  Widget _buildUnitsGrid() {
+    if (rooms.isEmpty) {
+      // base case
+      return Container();
+    }
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, // number of units per row in the grid
+        childAspectRatio: 0.6,
+        //mainAxisSpacing: 30,    // vertical spacing
+        crossAxisSpacing: 20, // horizontal spacing
+      ),
+      itemBuilder: (context, unitIndex) {
+        final unit = rooms[unitIndex];
+        return Column(
+          children: [
+            Text(
+              'Room Type: ${unit.roomTypeName}', // display Room Type
+              style:
+              TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: Colors.lightGreen[100],
+                border: Border.all(color: Colors.green, width: 2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.0,
+                ),
+                itemBuilder: (context, gridIndex) {
+                  final unit = rooms[unitIndex];
+                  return GestureDetector(
+                    onTap: () {
+                      context.go('/WindowListPage');
+                    },
+                  );
+                },
+                itemCount: 9,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+              ),
+            ),
+            SizedBox(height: 10),
+          ],
+        );
+      },
+      itemCount: rooms.length,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120.0), // appbar height
+        preferredSize: Size.fromHeight(120.0), // appBar height
         child: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -54,10 +147,10 @@ class _MeasurementPageState extends State<MeasurementPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  //backarrow
+                  // backarrow
                   InkWell(
                     onTap: () {
-                      context.go('/WindowListPage');
+                      context.go('/FloorListPage');
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -91,7 +184,7 @@ class _MeasurementPageState extends State<MeasurementPage> {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: 'Choose Window Type ',
+                                  text: '     Floor#: ,  Unit#     ',
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 16),
                                 ),
@@ -102,10 +195,10 @@ class _MeasurementPageState extends State<MeasurementPage> {
                       ),
                     ),
                   ),
-                  // forward arrow
+                  // forward arrow button
                   InkWell(
                     onTap: () {
-                      context.go('/WindowSpecsPage');
+                      context.go('/WindowListPage');
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -127,7 +220,8 @@ class _MeasurementPageState extends State<MeasurementPage> {
         ),
       ),
       body: Padding(
-        padding: calculatePaddingBasedOnUnits(),
+        padding:
+        calculatePaddingBasedOnUnits(), //calculate padding based on units
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,43 +237,30 @@ class _MeasurementPageState extends State<MeasurementPage> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        '"Brooklyn Heights" Bedroom:2/ Windows:2',
+                        '"Brooklyn Heights" Unit#: ',
                         style: TextStyle(color: Colors.cyan[100], fontSize: 18),
                       ),
                     ),
                     SizedBox(height: 20),
                     Container(
                       height: 200,
-                      child: selectedWindowType == null
-                          ? Center(child: Text('Please select window types:'))
-                          : Image.asset('assets/$selectedWindowType.png'),
+                      child: _buildUnitsGrid(),
                     ),
                     SizedBox(height: 20),
                   ],
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                height: 500,
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
+              ElevatedButton(
+                onPressed: _showAddRoomDialog,
+                child: Text('Add New Room'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  itemCount: windowTypes.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        setState(() {
-                          selectedWindowType = windowTypes[index];
-                        });
-                      },
-                      child: Image.asset('assets/${windowTypes[index]}.png'),
-                    );
-                  },
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -188,4 +269,10 @@ class _MeasurementPageState extends State<MeasurementPage> {
   }
 }
 
-void main() => runApp(MaterialApp(home: MeasurementPage()));
+EdgeInsetsGeometry calculatePaddingBasedOnUnits() {
+  int numberOfUnits = rooms.length;
+
+  double paddingValue = 10.0 + numberOfUnits;
+  return EdgeInsets.all(paddingValue);
+}
+
