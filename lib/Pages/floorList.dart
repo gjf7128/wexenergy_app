@@ -1,38 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'roomList.dart';
 import 'window_type.dart';
+import 'models.dart';
+import 'global_state.dart';
 
-class Room {
-  bool isSelected;
-  RoomType? type;
 
-  Room({this.isSelected = false, this.type});
-}
-
-enum RoomType {
-  bedroom,
-  livingRoom,
-  kitchen,
-  office,
-  bathroom,
-}
-
-class Unit {
-  String unitName;
-  int roomCount;
-  List<Room> rooms;
-
-  Unit({required this.unitName, required this.roomCount, required this.rooms});
-}
 
 List<Unit> units = [];
 
-class MyRoomListPage extends StatefulWidget {
+class MyFloorListPage extends StatefulWidget {
+
   @override
-  _MyRoomListPageState createState() => _MyRoomListPageState();
+  _MyFloorListPageState createState() => _MyFloorListPageState();
 }
 
-class _MyRoomListPageState extends State<MyRoomListPage> {
+class _MyFloorListPageState extends State<MyFloorListPage> {
   TextEditingController _unitController = TextEditingController();
 
   //add new unit function
@@ -49,6 +32,10 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
         _unitController.clear(); // empty the input field
       });
     }
+  }
+
+  void _navigateToRoomList(Unit unit) {
+    context.go('/RoomListPage', extra: unit);
   }
 
   //create unit grids function
@@ -86,80 +73,19 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                   childAspectRatio: 1.0,
                 ),
                 itemBuilder: (context, gridIndex) {
-                  if (gridIndex < unit.roomCount) {
-                    final room = unit.rooms[gridIndex];
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          room.isSelected = !room.isSelected;
-                        });
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: room.isSelected ? Colors.red : Colors.yellow,
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.green,
-                            width: 2,
-                          ),
-                        ),
-                        margin: EdgeInsets.all(2),
-                      ),
-                    );
-                  } else {
-                    return GestureDetector(
-                      onTap: () async {
-                        RoomType? selectedType = await showDialog<RoomType>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return SimpleDialog(
-                              title: Text('Choose Room Type'),
-                              children: <Widget>[
-                                ...RoomType.values.map((type) {
-                                  return SimpleDialogOption(
-                                    onPressed: () {
-                                      Navigator.pop(context, type);
-                                    },
-                                    child:
-                                        Text(type.toString().split('.').last),
-                                  );
-                                }).toList()
-                              ],
-                            );
-                          },
-                        );
-                        if (selectedType != null) {
-                          setState(() {
-                            unit.roomCount += 1;
-                            unit.rooms.add(
-                                Room(isSelected: false, type: selectedType));
-                          });
-                        }
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.green,
-                            width: 2,
-                          ),
-                        ),
-                        margin: EdgeInsets.all(2),
-                      ),
-                    );
-                  }
+                  final unit = units[unitIndex];
+                  return GestureDetector(
+                    onTap: () {
+                      context.go('/RoomListPage');
+                    }
+                  );
                 },
                 itemCount: 9,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
               ),
             ),
-            SizedBox(height: 5),
-            Text(
-              '${unit.roomCount} Rooms', // display number of rooms
-              style: TextStyle(color: Colors.black),
-            ),
+            SizedBox(height: 10),
           ],
         );
       },
@@ -233,7 +159,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: 'Part 1/7 : Floor & Unit # ',
+                                  text: ' Current Floor Page ',
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 16),
                                 ),
@@ -257,7 +183,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                   // forward arrow button
                   InkWell(
                     onTap: () {
-                      context.go('/WindowListPage');
+                      context.go('/RoomListPage');
                     },
                     child: Ink(
                       decoration: BoxDecoration(
@@ -296,7 +222,7 @@ class _MyRoomListPageState extends State<MyRoomListPage> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        '"Brooklyn Heights" Floor: 10/10, Unit: 105',
+                        '"Brooklyn Heights" Floor#: ',
                         style: TextStyle(color: Colors.cyan[100], fontSize: 18),
                       ),
                     ),
