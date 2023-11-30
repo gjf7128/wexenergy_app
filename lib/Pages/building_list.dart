@@ -13,7 +13,7 @@ class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
 
-class homePage extends StatelessWidget {
+class buildingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +22,7 @@ class homePage extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: BuildingListPage(),
     );
   }
 }
@@ -36,12 +36,12 @@ class BuildingInfo {
   BuildingInfo({required this.buildingName, required this.floors, required this.rooms, required this.windows});
 }
 
-class HomePage extends StatefulWidget {
+class BuildingListPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _BuildingListPageState createState() => _BuildingListPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _BuildingListPageState extends State<BuildingListPage> {
 
   final primaryBlue = HexColor("#418fde");
   final primaryOrange = HexColor("#ff8200");
@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                         alignment: Alignment.center,
                         child: ElevatedButton(
                           onPressed: () {
-                            context.go('/RoomListPage');
+                            context.go('/FloorListPage');
                           }, // Transition here
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blue, // Button color

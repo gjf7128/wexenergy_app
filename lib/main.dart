@@ -9,7 +9,7 @@ import 'package:wexenergy_app/Pages/window_type.dart';
 import 'package:wexenergy_app/Pages/windowspecs_page.dart';
 import 'package:wexenergy_app/Pages/roomList.dart';
 import 'package:wexenergy_app/Pages/models.dart';
-import 'package:wexenergy_app/Pages/home_page.dart';
+import 'package:wexenergy_app/Pages/building_list.dart';
 
 import 'Pages/login_page.dart';
 
@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
-        path: '/HomePage',
-        builder: (context, state) => HomePage(),
+        path: '/BuildingListPage',
+        builder: (context, state) => BuildingListPage(),
       ),
       GoRoute(
         path: '/BusinessInfoPage',
