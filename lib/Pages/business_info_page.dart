@@ -16,8 +16,8 @@ Widget build(BuildContext context) {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      
-      body: Column(
+      body: SingleChildScrollView(
+      child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Column(
@@ -135,6 +135,7 @@ Widget build(BuildContext context) {
             ),
           ],
       ),
+      )
     );
   }
 }
