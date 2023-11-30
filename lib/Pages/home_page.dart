@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                         alignment: Alignment.center,
                         child: ElevatedButton(
                           onPressed: () {
-                            context.go('/BusinessInfoPage');
+                            context.go('/RoomListPage');
                           }, // Transition here
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blue, // Button color

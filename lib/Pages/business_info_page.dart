@@ -76,7 +76,7 @@ Widget build(BuildContext context) {
                               )
                             ),
                             onPressed: () {
-                              context.go('/RoomListPage');
+                              context.go('/HomePage');
                             },
                             child: const Text('Start Measuring') 
                           )

@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    context.go('/HomePage');
+                    context.go('/BusinessInfoPage');
                   }, // Transition here
                   child: const Text(submitButtonLabel),
                 ),
