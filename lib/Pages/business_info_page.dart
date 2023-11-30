@@ -76,6 +76,7 @@ Widget build(BuildContext context) {
                               )
                             ),
                             onPressed: () {
+                              
                               context.go('/FloorListPage');
                             },
                             child: const Text('Start Measuring') 

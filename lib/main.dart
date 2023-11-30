@@ -1,3 +1,5 @@
+// import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wexenergy_app/Pages/business_info_page.dart';
@@ -7,6 +9,7 @@ import 'package:wexenergy_app/Pages/window_type.dart';
 import 'package:wexenergy_app/Pages/windowspecs_page.dart';
 import 'package:wexenergy_app/Pages/roomList.dart';
 import 'package:wexenergy_app/Pages/models.dart';
+import 'package:wexenergy_app/Pages/home_page.dart';
 
 import 'Pages/login_page.dart';
 
@@ -22,6 +25,10 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: '/',
         builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: '/HomePage',
+        builder: (context, state) => HomePage(),
       ),
       GoRoute(
         path: '/BusinessInfoPage',
